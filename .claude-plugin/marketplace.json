@@ -1,14 +1,22 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "jetlinks-cowork-plugins",
   "owner": {
     "name": "JetLinks"
   },
-  "description": "Marketplace for the JetLinks team. Hosts plugins that bridge Cowork (spec / prototype) and Claude Code (implementation).",
+  "metadata": {
+    "description": "Marketplace for the JetLinks team. Hosts plugins that bridge Cowork (spec / prototype) and Claude Code (implementation).",
+    "version": "0.1.0"
+  },
   "plugins": [
     {
       "name": "jetlinks-spec",
       "source": "./jetlinks-spec",
-      "description": "Two commands: /spec-start scaffolds a Cowork-to-CLI feature spec under docs/plans/<feature>/; /spec-mock scaffolds a frontend-only mock prototype directly in the project's frontend with no backend code."
+      "version": "0.2.0",
+      "description": "Two commands: /spec-start scaffolds a Cowork-to-CLI feature spec under docs/plans/<feature>/; /spec-mock scaffolds a frontend-only mock prototype directly in the project's frontend with no backend code.",
+      "author": {
+        "name": "JetLinks"
+      }
     }
   ]
 }
