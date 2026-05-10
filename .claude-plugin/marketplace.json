@@ -3,12 +3,12 @@
   "owner": {
     "name": "JetLinks"
   },
-  "description": "Local marketplace for the JetLinks team. Hosts plugins that bridge Cowork (spec / prototype) and Claude Code (implementation).",
+  "description": "Marketplace for the JetLinks team. Hosts plugins that bridge Cowork (spec / prototype) and Claude Code (implementation).",
   "plugins": [
     {
       "name": "jetlinks-spec",
       "source": "./jetlinks-spec",
-      "description": "Cowork-to-CLI feature spec handoff. Scaffold docs/plans/<feature>/ with requirements.md, prototype.html, and plan.md, then hand off to a CLI agent."
+      "description": "Two commands: /spec-start scaffolds a Cowork-to-CLI feature spec under docs/plans/<feature>/; /spec-mock scaffolds a frontend-only mock prototype directly in the project's frontend with no backend code."
     }
   ]
 }

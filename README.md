@@ -2,7 +2,9 @@
 
 A Claude Code plugin marketplace for the JetLinks team. Currently ships one plugin:
 
-- **`jetlinks-spec`** — Cowork-to-CLI feature spec handoff. Use Cowork to draft requirements, prototype, and implementation plan, then hand off to a CLI agent to implement. Bridges via a `docs/plans/<feature>/` directory.
+- **`jetlinks-spec`** — Two commands for spec-driven and frontend-prototype workflows:
+  - `/spec-start <feature-name>` — Cowork-to-CLI feature spec handoff (`requirements.md` + `prototype.html` + `plan.md` under `docs/plans/<feature>/`).
+  - `/spec-mock <feature-name>` — frontend-only prototype: scaffold a page/route directly in the project's frontend (`ui/` / `runtime-ui/` etc.) wired with mock data, plus a lightweight `prototype-notes.md`.
 
 ## Install in Claude Code
 
@@ -11,7 +13,7 @@ claude plugin marketplace add superzoc/jetlinks-cowork-plugins
 claude plugin install jetlinks-spec@jetlinks-cowork-plugins
 ```
 
-After install, `/spec-start <feature-name>` is available in any Claude Code session — it scaffolds `docs/plans/<feature-name>/` with three pre-filled templates (`requirements.md`, `prototype.html`, `plan.md`).
+After install, both `/spec-start <feature-name>` and `/spec-mock <feature-name>` are available in any Claude Code session.
 
 Pull the latest version any time with:
 
@@ -42,7 +44,8 @@ Then drop `/tmp/jetlinks-spec.plugin` into a Cowork session — it renders as an
     ├── README.md
     └── skills/
         ├── jetlinks-spec/  workflow knowledge skill
-        └── spec-start/     /spec-start <name> action skill
+        ├── spec-start/     /spec-start <name> action skill
+        └── spec-mock/      /spec-mock <name> action skill
 ```
 
 ## Adding a new plugin to this marketplace

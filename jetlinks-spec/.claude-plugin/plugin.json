@@ -1,7 +1,7 @@
 {
   "name": "jetlinks-spec",
-  "version": "0.1.0",
-  "description": "Cowork-to-CLI feature spec handoff. Use Cowork for requirements, prototype, and plan; scaffold a docs/plans/ feature directory; then hand off to a CLI agent for implementation. Project-agnostic by design.",
+  "version": "0.2.0",
+  "description": "Cowork-to-CLI feature spec handoff plus frontend-only prototype scaffolding. Use /spec-start to draft requirements, prototype, and plan; use /spec-mock to scaffold a mock-data frontend prototype with no backend. Project-agnostic by design.",
   "author": {
     "name": "JetLinks"
   }
