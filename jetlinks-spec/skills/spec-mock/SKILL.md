@@ -1,10 +1,36 @@
 ---
 name: spec-mock
-description: Frontend-only product-design workflow. Scaffold a new page or route inside the project's existing frontend (e.g. ui/ or runtime-ui/), wire it with mock data, and skip backend implementation entirely. Trigger when the user types "/spec-mock", asks to "build a frontend prototype", "design with mock data", "scaffold a mock page", "skip backend and just iterate UI", "frontend-first prototype", or equivalent intent in Chinese (frontend-only prototype, mock data to validate UI, frontend-first design). Also drops a lightweight docs/plans/[feature-name]/prototype-notes.md so scope, mock data shape, and the gap to a real backend are recorded for later promotion to /spec-start.
+description: Frontend-only product-design workflow. **Run from a CLI coding agent (Claude Code etc.), not Cowork.** Scaffold a new page or route inside the project's existing frontend (e.g. ui/ or runtime-ui/), wire it with mock data, and skip backend implementation entirely. Trigger when the user types "/spec-mock", asks to "build a frontend prototype", "design with mock data", "scaffold a mock page", "skip backend and just iterate UI", "frontend-first prototype", or equivalent intent in Chinese (frontend-only prototype, mock data to validate UI, frontend-first design). Also drops a lightweight docs/plans/[feature-name]/prototype-notes.md so scope, mock data shape, and the gap to a real backend are recorded for later promotion to /spec-start.
 argument-hint: "<feature-name>"
 ---
 
 # Spec Mock — Frontend-Only Prototype Workflow
+
+## ⚠️ Run this in a CLI agent, not Cowork
+
+This skill writes Vue / TS / route code into the production frontend tree.
+**It must not be invoked from Cowork.** The `jetlinks-spec` workflow draws a
+hard line: Cowork owns the spec phase (`/spec-start` → `requirements.md` /
+`prototype.html` / `plan.md`); a CLI coding agent owns the code phase.
+
+If the current environment is Cowork (signs: a connected workspace folder
+appears under `/sessions/.../mnt/`, the visualize tool is available, the
+agent description mentions "Cowork mode"), refuse this skill and redirect:
+
+1. If `docs/plans/<feature-name>/` does not yet exist, run `/spec-start
+   <feature-name>` here in Cowork to fill in `requirements.md` +
+   `prototype.html` (and stub `plan.md` pointing at spec-mock).
+2. Tell the user to switch to a CLI agent (Claude Code) inside the same
+   repository, then re-invoke `/spec-mock <feature-name>`. The CLI agent
+   will read those three files and scaffold the runnable page accordingly.
+3. To iterate UI visuals while still in Cowork, use the visualize tool's
+   `show_widget` for inline previews, or save a static mockup as
+   `docs/plans/<feature-name>/prototype.html` — never write into the real
+   frontend tree from Cowork.
+
+Cowork is doc-only by contract. The single most damaging failure mode of
+this skill is being invoked from Cowork and silently scaffolding pages
+into `ui/` / `runtime-ui/`.
 
 ## Purpose
 
@@ -118,6 +144,7 @@ When the prototype validates the design and the team wants to ship for real:
 
 ## When NOT to use /spec-mock
 
+- **You are in Cowork.** This skill writes production frontend code; Cowork is doc-only. Run `/spec-start` here instead, then switch to a CLI agent.
 - The real backend is already there and you just need to wire the UI: write real code directly, mocking is wasted effort
 - The feature is for an external stakeholder demo, not internal iteration: a standalone HTML mock (or `prototype.html` from `/spec-start`) is more portable and won't pollute the production frontend
 - The feature requires backend logic that materially changes the UI flow (auth, multi-step transactions, real-time): mocking will hide bugs; spec it properly first via `/spec-start`, then build minimal backend

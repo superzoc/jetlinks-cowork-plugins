@@ -1,10 +1,24 @@
 ---
 name: spec-start
-description: Scaffold a docs/plans/[feature-name]/ directory with three pre-filled templates (requirements.md, prototype.html, plan.md) before starting spec work. Trigger when the user types "/spec-start", asks to "scaffold a new feature spec", "create a docs/plans entry", "start a new feature workflow", or equivalents in Chinese meaning "new spec", "create a new feature directory", or "pull a PRD template". After scaffolding, hand off to the jetlinks-spec workflow skill for guided filling.
+description: Scaffold a docs/plans/[feature-name]/ directory with three pre-filled templates (requirements.md, prototype.html, plan.md) before starting spec work. **Designed for the Cowork side of the spec-first workflow** — writes documentation only, never business code. Trigger when the user types "/spec-start", asks to "scaffold a new feature spec", "create a docs/plans entry", "start a new feature workflow", or equivalents in Chinese meaning "new spec", "create a new feature directory", or "pull a PRD template". After scaffolding, hand off to the jetlinks-spec workflow skill for guided filling.
 argument-hint: "<feature-name>"
 ---
 
 # Spec Start — Scaffold a Feature Spec Directory
+
+## Where to run this
+
+This skill is designed for the **Cowork** side of the spec-first workflow.
+It only writes into `docs/plans/<feature-name>/` and never touches business
+code. Multi-turn template filling (requirements interview, prototype HTML,
+plan drafting) is interactive and benefits from Cowork's `AskUserQuestion`
+and visualize tools.
+
+A CLI agent may also invoke this skill for reproducibility (re-scaffolding
+a feature, fixing a damaged directory), but the spec-writing phase itself
+should happen in Cowork. The companion `spec-mock` skill — which writes
+runnable frontend code — must run in CLI, not Cowork. See `jetlinks-spec`
+for the full handoff contract.
 
 ## Goal
 

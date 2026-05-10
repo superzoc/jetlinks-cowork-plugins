@@ -123,9 +123,38 @@ For these, drive the CLI agent directly without going through `/spec-start`. If 
 - **In CLI**, after reading `plan.md`, chain to a project-specific routing skill (e.g. `jetlinks-router`) and then to focused skills based on the owning module.
 - **At commit time**, chain to a delivery skill (e.g. `jetlinks-delivery`) so verification evidence and commit format match project conventions.
 
+## Frontend-only fast path: `/spec-mock`
+
+For pure-frontend features (UI iteration, design validation, no real
+backend yet), the workflow has a sibling skill that splits the same way:
+
+- **Cowork** still does the spec phase. Run `/spec-start <name>` to
+  scaffold `docs/plans/<name>/`, fill `requirements.md` + `prototype.html`,
+  and let `plan.md` be a stub that says "implementation handed to
+  `/spec-mock` in CLI". Cowork iterates the visual prototype using the
+  visualize tool (`show_widget` for inline previews) or by editing
+  `prototype.html` directly — it does **not** write into the production
+  frontend tree.
+- **CLI** runs `/spec-mock <name>` to scaffold the runnable page in
+  `<frontend>/views/...` with mock data, and writes `prototype-notes.md`
+  (the gap-to-real-backend record) into the same `docs/plans/<name>/`
+  directory.
+
+The boundary is identical to the full spec workflow: Cowork never writes
+production frontend code; CLI never edits requirements / prototype without
+surfacing back to Cowork. `/spec-mock` from Cowork is a contract violation
+and the skill itself enforces a redirect — see `spec-mock/SKILL.md` for
+details.
+
+If a feature does **not** need backend at all (pure UI demo for an internal
+review, throwaway prototype), the canonical flow is `spec-start` (Cowork)
+→ `spec-mock` (CLI). For features that will ship with a real backend, use
+the full four-phase workflow above.
+
 ## Common failure modes to avoid
 
 - Editing business code from the Cowork side (only `docs/plans/` should be touched here).
+- Running `/spec-mock` from Cowork. Cowork is doc-only by contract; `spec-mock` writes runnable pages into the production frontend and must be invoked from a CLI agent. If asked to run `spec-mock` from Cowork, redirect: scaffold spec-only via `/spec-start`, then have the user switch to a CLI agent to run `spec-mock`.
 - Creating a separate `verification.md` or `delivery.md` in the feature directory — back-fill into `plan.md` instead.
 - Letting `requirements.md` and `plan.md` drift apart. If requirements change, edit `requirements.md` first, then update `plan.md` to match, in the same commit.
 - Skipping the "out of scope" section in `plan.md`. It is the single most useful field for keeping the CLI phase contained.
