@@ -12,8 +12,8 @@
     {
       "name": "jetlinks-spec",
       "source": "./jetlinks-spec",
-      "version": "0.2.0",
-      "description": "Two commands: /spec-start scaffolds a Cowork-to-CLI feature spec under docs/plans/<feature>/; /spec-mock scaffolds a frontend-only mock prototype directly in the project's frontend with no backend code.",
+      "version": "0.3.0",
+      "description": "Spec-first workflow split into four boundary-clean skills: spec-workflow (contract knowledge), spec-scaffold (Cowork: research + spec interview + handoff), spec-prototype (CLI: frontend-only mock branch), spec-verify (Cowork: Phase 4 back-fill reconciliation).",
       "author": {
         "name": "JetLinks"
       }

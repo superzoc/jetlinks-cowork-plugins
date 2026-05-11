@@ -1,0 +1,6 @@
+# Build artifacts produced by pack.sh
+dist/
+*.plugin
+
+# OS / editor
+.DS_Store

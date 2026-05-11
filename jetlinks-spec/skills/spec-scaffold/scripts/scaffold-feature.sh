@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Scaffold docs/plans/<feature-name>/ from the spec-start templates.
+# Scaffold docs/plans/<feature-name>/ from the spec-scaffold templates.
 #
 # Usage:
 #   scaffold-feature.sh <feature-name> [<repo-root>]

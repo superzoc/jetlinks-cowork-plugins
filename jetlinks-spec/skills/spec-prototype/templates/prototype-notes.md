@@ -74,7 +74,7 @@ What happens to this prototype after the design is validated:
 
 When promoting:
 
-1. Run `/spec-start {{FEATURE_NAME}}` in this directory if not already done
+1. Run `/spec-scaffold {{FEATURE_NAME}}` in this directory if not already done
 2. Use this file's section 4 as input to `plan.md` (backend implementation steps)
 3. Use this file's section 3 to align `requirements.md` data model
 4. Replace mock data with real API calls in the existing component
